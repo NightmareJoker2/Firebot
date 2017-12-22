@@ -20,6 +20,7 @@
   
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|Roboto:100,300,400,500,700" rel="stylesheet">
     
+    <link ng-href="../css/Static.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link ng-href="../css/{{appTheme()}}.css" rel="stylesheet">
     
@@ -72,11 +73,20 @@
     <script type="text/javascript" src="./directives/controls/effectList.js"></script>
     <script type="text/javascript" src="./directives/controls/notificationCenter.js"></script>
     <script type="text/javascript" src="./directives/misc/tooltip.js"></script>
+    <script type="text/javascript" src="./directives/misc/ngDraggable.js"></script>
+    <script type="text/javascript" src="./directives/misc/connectionPanel.js"></script>
   </head>
   <body>
     <div class='loader-wrapper' ng-if="showSpinner">
       <div class="loader">Loading...</div>
     </div>
+
+    <div class="conn-panel-wrapper">
+      <div class="conn-panel-container" id="conPanContr">
+          <div class="connection-panel" ng-draggable="dragOptions"></div>
+      </div>  
+    </div>
+
     <div class="fb-nav" ng-class="{'contracted': !navExpanded}">
       <div class="nav-header" >
         <img class="nav-header-icon" ng-class="{'contracted': !navExpanded}" src="../images/logo_transparent.png">      

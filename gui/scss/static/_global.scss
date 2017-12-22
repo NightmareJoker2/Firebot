@@ -1,0 +1,29 @@
+.conn-panel-wrapper {
+    position:fixed;
+    z-index:1000;
+    width: 100%; 
+    height:100%;
+    padding:20px; 
+    pointer-events: none;
+  }
+  
+  .conn-panel-container {
+    width:100%; 
+    height:100%;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+  
+  .connection-panel {
+    width: 200px;
+    height: 100px;
+    background: #434A54;
+    pointer-events: all;
+    position: absolute;
+  }
+  
+  .panel-test {
+    width: 100px; height: 100px;background:black;pointer-events:all;position:absolute;
+  }

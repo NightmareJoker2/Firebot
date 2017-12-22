@@ -41,6 +41,10 @@
             notificationService.startExternalIntervalCheck();
         }, 1000);
 
+        $scope.dragOptions = {
+            container: '#conPanContr'
+        };
+
         /**
       * rootScope functions. This means they are accessable in all scopes in the front end
       * This is probably bad form, so putting functions in rootScope shouldnt be abused too much
