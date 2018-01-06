@@ -1,0 +1,37 @@
+<eos-container header="Condition">
+    <div class="btn-group">
+        <button type="button" class="btn btn-default" data-toggle="dropdown">
+            <span>{{getConditionName(effect.conditionId)}}</span> <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+            <li ng-repeat="condition in conditions track by $index"
+                ng-click="effect.conditionId = condition.id">
+                <a href>{{condition.name}}</a>
+            </li>
+        </ul>
+    </div>
+</eos-container>
+<div>
+    <span>
+        
+    </span>
+</div>
+<div ng-show="effect.conditionId" style="padding-top:10px">
+    <effect-list effects="effect.ifEffects" 
+                trigger="{{trigger}}" 
+                update="effectListUpdated('if', effects)"
+                header="Then run these effects"
+                header-classes="h4"
+                effect-container-classes="effect-setting-content" 
+                modalId="{{modalId}}"
+                is-array="true"></effect-list>
+
+    <effect-list effects="effect.elseEffects" 
+                trigger="{{trigger}}" 
+                update="effectListUpdated('else', effects)"
+                header="Otherwise run these effects"
+                header-classes="h4"
+                effect-container-classes="effect-setting-content" 
+                modalId="{{modalId}}"
+                is-array="true"></effect-list>
+</div>

@@ -299,6 +299,41 @@
                     };
                     break;
 
+                case EffectList.CONDITIONAL_EFFECT: {
+                    controller = ($scope) => {
+                        const conditionsManager = require('../../lib/common/conditionsManager');
+
+                        $scope.conditions = conditionsManager.conditions.map(c => {
+                            return { id: c.id, name: c.name };
+                        });
+
+                        $scope.getConditionName = function(conditionId) {
+                            let search = conditionsManager.conditions.find(c => c.id === conditionId);
+                            if (search != null) {
+                                return search.name;
+                            }
+                            return "Pick one";
+                        };
+
+                        if ($scope.effect.ifEffects == null) {
+                            $scope.effect.ifEffects = [];
+                        }
+
+                        if ($scope.effect.elseEffects == null) {
+                            $scope.effect.elseEffects = [];
+                        }
+
+                        $scope.effectListUpdated = function(listType, effects) {
+                            if (listType === 'if') {
+                                $scope.effect.ifEffects = effects;
+                            } else if (listType === 'else') {
+                                $scope.effect.elseEffects = effects;
+                            }
+                        };
+
+                    };
+                    break;
+                }
                 case EffectList.EFFECT_GROUP:
                 case EffectList.RANDOM_EFFECT:
                     controller = ($scope) => {
