@@ -343,10 +343,19 @@
                 return false;
             };
 
-            // Gets view count setting for ui.
+            // Gets viewer list setting for ui.
             service.getChatViewerListSetting = function() {
                 let viewerList = settingsService.getChatViewerList();
                 if (viewerList === "On") {
+                    return true;
+                }
+                return false;
+            };
+
+            // Gets viewer list setting for ui.
+            service.getChatSpoilerCoverSetting = function() {
+                let spoilerCover = settingsService.getChatSpoilerCover();
+                if (spoilerCover === "On") {
                     return true;
                 }
                 return false;

@@ -142,7 +142,18 @@
           </div>
           <div class="row">
             <div class="setting col-sm-6">
-              &nbsp;
+              <div class="setting-heading">Spoiler Cover</div>
+              <div class="setting-description">Turn the Spoiler Cover in the chat feed on or off. <br />This will cover over deleted messages with a "spoiler cover".</div>
+              <div class="dropdown options-chatcount-dropdown">
+                <button class="btn btn-default dropdown-toggle" type="button" id="options-spoiler-cover" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                  <span class="dropdown-text">{{settings.getSpoilerCover()}}</span>
+                  <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="options-emulation">
+                  <li><a href ng-click="settings.setSpoilerCover(true)">On</a></li>
+                  <li><a href ng-click="settings.setSpoilerCover(false)">Off</a></li>
+                </ul>
+              </div>
             </div>
             <div class="setting col-sm-6">
               <div class="setting-heading">Viewer Count</div>

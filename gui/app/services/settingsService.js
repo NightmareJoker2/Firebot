@@ -218,6 +218,23 @@
             };
 
             // Used for settings menu.
+            service.getSpoilerCover = function() {
+                let chatSpoilerCover = getDataFromFile('/settings/chatSpoilerCover');
+                if (chatSpoilerCover === true) {
+                    return "On";
+                }
+                return "Off";
+            };
+
+            service.setSpoilerCover = function(chatSpoilerCover) {
+                pushDataToFile('/settings/chatSpoilerCover', chatSpoilerCover === true);
+            };
+
+            service.showSpoilerCover = function() {
+                return getDataFromFile('/settings/chatSpoilerCover');
+            };
+
+            // Used for settings menu.
             service.getChatViewerList = function() {
                 let chatViewerList = getDataFromFile('/settings/chatViewerList');
                 if (chatViewerList === true) {

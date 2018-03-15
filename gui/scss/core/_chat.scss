@@ -115,9 +115,15 @@
         color: $alertcolor;
     }
     &.isDeleted .chatContent{
-        text-decoration: line-through;
-        color: $chatDeletedColor;
+        background: $dark-background-color;
+        // text-decoration: line-through;
+        color: $dark-background-color;
     }
+    .chatContent.uncover{
+        // background: $dark-background-color + 20%;
+        color: $chatTextColor;
+    }
+    
     &.isAction{
         .chatContent{
             font-style: italic;

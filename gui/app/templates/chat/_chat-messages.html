@@ -38,7 +38,7 @@
                                 {{getTimeStamp(message)}}
                             </span>
                         </div>
-                        <div class="chatContent" style="font-size: 1.17em;">
+                        <div class="chatContent" style="font-size: 1.17em;" ng-class="{uncover: hover}" ng-init="hover = false" ng-mouseenter="hover = true" ng-mouseleave="hover = false">
                             <span ng-repeat="segment in message.message.message">
                                 <span ng-if="segment.type === 'text'">
                                     {{segment.data}}
@@ -157,6 +157,15 @@
                     <rzslider rz-slider-model="$parent.notificationVolume" rz-slider-options="$parent.sliderOptions"></rzslider>
                     <i class="fal fa-volume-up volume-high" style="font-size:25px; padding-bottom:5px"></i>
                 </div>                      
+            </div>
+            <div style="display: flex;align-items: center;justify-content: space-between; padding-left: 10px;">
+                <span>Spoiler-cover</span>
+                <span>
+                    <input class="tgl tgl-light" id="cb7" type="checkbox"
+                        ng-checked="settings.showSpoilerCover()" 
+                        ng-click="settings.setSpoilerCover(!settings.showSpoilerCover())"/>
+                    <label class="tgl-btn" for="cb7"></label>
+                </span>
             </div>
         </div>               
     </div>
