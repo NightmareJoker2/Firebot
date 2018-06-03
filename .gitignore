@@ -80,3 +80,4 @@ scripts
 .env
 resources/overlay/js/port.js
 eslint.log.htm
+build/config.gypi
