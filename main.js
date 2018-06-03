@@ -1,6 +1,11 @@
 'use strict';
 
 const path = require('path');
+if (process.platform === 'darwin') {
+    // change working directory to lazily work around path issues.
+    // Gotta do this as early as possible...
+    process.chdir(path.dirname(process.execPath));
+}
 const url = require('url');
 const logger = require('./lib/logwrapper');
 logger.info("Starting Firebot...");
