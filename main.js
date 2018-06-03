@@ -11,7 +11,7 @@ const logger = require('./lib/logwrapper');
 logger.info("Starting Firebot...");
 
 const electron = require('electron');
-const {app, BrowserWindow, ipcMain, shell, dialog} = electron;
+const {app, Menu, BrowserWindow, ipcMain, shell, dialog} = electron;
 const windowStateKeeper = require('electron-window-state');
 const GhReleases = require('electron-gh-releases');
 const settings = require('./lib/common/settings-access').settings;
@@ -113,6 +113,33 @@ function createWindow () {
     // automatically (the listeners will be removed when the window is closed)
     // and restore the maximized or full screen state
     mainWindowState.manage(mainWindow);
+
+    // make sure we get Copy & Paste on macOS by creating an application
+    // menu, though... this couldn't hurt on other operating systems,
+    // either
+    if (process.platform === 'darwin') {
+        let template = [{
+            label: "Application",
+            submenu: [
+                { label: "About Application", selector: "orderFrontStandardAboutPanel:" },
+                { type: "separator" },
+                { label: "Quit", accelerator: "CmdOrCtrl+Q", click: function() {
+                    app.quit();
+                }}
+            ]}, {
+            label: "Edit",
+            submenu: [
+                { label: "Undo", accelerator: "CmdOrCtrl+Z", selector: "undo:" },
+                { label: "Redo", accelerator: "Shift+CmdOrCtrl+Z", selector: "redo:" },
+                { type: "separator" },
+                { label: "Cut", accelerator: "CmdOrCtrl+X", selector: "cut:" },
+                { label: "Copy", accelerator: "CmdOrCtrl+C", selector: "copy:" },
+                { label: "Paste", accelerator: "CmdOrCtrl+V", selector: "paste:" },
+                { label: "Select All", accelerator: "CmdOrCtrl+A", selector: "selectAll:" }
+            ]}
+        ];
+        Menu.setApplicationMenu(Menu.buildFromTemplate(template));
+    }
 
     // and load the index.html of the app.
     mainWindow.loadURL(url.format({
