@@ -297,6 +297,10 @@
                 case EffectList.CELEBRATION:
                     controller = ($scope) => {
 
+                        $scope.showOverlayInfoModal = function(overlayInstance) {
+                            utilityService.showOverlayInfoModal(overlayInstance);
+                        };
+
                         $scope.celebrationTypes = [
                             "Fireworks"
                         ];
@@ -348,11 +352,11 @@
                         }
 
                         $scope.buttons = boardService.getControlsForSelectedBoard()
-                            .filter(c => c.kind === "button")
+                            .filter(c => c.kind === "button" || c.kind === "textbox")
                             .map(b => {
                                 return {
                                     controlId: b.controlId,
-                                    text: b.text,
+                                    text: b.text != null && b.text.trim() !== "" ? b.text : b.controlId,
                                     scene: b.scene
                                 };
                             });
