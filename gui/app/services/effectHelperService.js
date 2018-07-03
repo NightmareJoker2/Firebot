@@ -363,6 +363,22 @@
 
                     };
                     break;
+                case EffectList.CREATE_CLIP:
+                    controller = ($scope) => {
+                        if ($scope.effect.clipDuration == null) {
+                            $scope.effect.clipDuration = 30;
+                        }
+
+                        $scope.onDurationChange = function() {
+                            if ($scope.effect.clipDuration > 300) {
+                                $scope.effect.clipDuration = 300;
+                            }
+                            if ($scope.effect.clipDuration < 15) {
+                                $scope.effect.clipDuration = 15;
+                            }
+                        };
+                    };
+                    break;
                 case EffectList.DICE:
                     controller = ($scope) => {
 
@@ -633,6 +649,14 @@
 
                         if ($scope.effect.width == null || $scope.effect.width < 1) {
                             $scope.effect.width = 400;
+                        }
+
+                        if ($scope.effect.justify == null) {
+                            $scope.effect.justify = "center";
+                        }
+
+                        if ($scope.effect.dontWrap == null) {
+                            $scope.effect.dontWrap = false;
                         }
 
                         $scope.editorOptions = {
