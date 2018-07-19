@@ -4,7 +4,7 @@
 
     // This handles logins and connections to mixer interactive
 
-    const electronOauth2 = require('electron-oauth2');
+    const electronOauth2 = require('electron-oauth2'); // dis bad, `simple-oauth2` is better, and follows OAuth principle of using a system browser, unfortunately Electron still sends the default Chrome useragent, so it won't break like embeddable web-views on mobile devices do (and should)
     const dataAccess = require('../../lib/common/data-access.js');
     const {session} = require('electron').remote;
 
@@ -16,16 +16,16 @@
             let ListenerType = listenerService.ListenerType;
 
             // Auth Options
-            let streamerScopes = "user:details:self interactive:robot:self chat:connect chat:chat chat:whisper chat:bypass_links chat:bypass_slowchat chat:bypass_catbot chat:bypass_filter chat:clear_messages chat:giveaway_start chat:poll_start chat:remove_message chat:timeout chat:view_deleted chat:purge channel:details:self channel:update:self channel:clip:create:self";
+            let streamerScopes = "interactive:robot:self chat:connect chat:chat chat:whisper chat:bypass_links chat:bypass_slowchat chat:bypass_catbot chat:bypass_filter chat:giveaway_start chat:poll_start chat:remove_message chat:view_deleted channel:details:self channel:clip:create:self"; // user:details:self gives access to account email, you NEVER need that unless the application displays it and allows changing it, similarly moderation and channel edit scopes are bad here
 
-            let botScopes = "chat:connect chat:chat chat:whisper chat:bypass_links chat:bypass_slowchat";
+            let botScopes = "chat:connect chat:chat chat:whisper chat:bypass_links chat:bypass_slowchat chat:bypass_catbot chat:bypass_filter chat:remove_message chat:view_deleted channel:clip:create:self"; // for auditing purposes, it would be better to move all bot operations to the bot user, to tell automated bot actions apart from manually performed actions of the broadcaster
 
             let authInfo = {
-                clientId: 'f78304ba46861ddc7a8c1fb3706e997c3945ef275d7618a9',
+                clientId: 'f78304ba46861ddc7a8c1fb3706e997c3945ef275d7618a9', // deduplicate in code, or make sure this is the only place it exists (better)
                 authorizationUrl: "https://mixer.com/oauth/authorize",
                 tokenUrl: "https://mixer.com/api/v1/oauth/token",
                 useBasicAuthorizationHeader: false,
-                redirectUri: "https://crowbartools.com/projects/firebot/redirect.php"
+                redirectUri: "http://localhost/" // DO NOT use a remote server for this, the auth code and referrer will be passed there, end up in server logs and allows de-anonymization via token introspection by the server operator or anyone with access to it. You do not need this information, don't ask for it.
             };
 
             let authWindowParams = {

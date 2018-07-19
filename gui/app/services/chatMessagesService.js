@@ -328,9 +328,10 @@
                 } catch (err) {
                     // If this runs it means we've never saved the sub badge.
                     request({
-                        url: 'https://mixer.com/api/v1/channels/' + streamer.username + '?fields=badge,partnered',
+                        url: 'https://mixer.com/api/v1/channels/' + streamer.username + '?fields=badge,partnered', // `partnered` will typically be set, but better approach is to check user groups for `Partner` role to distinguish from `VerifiedPartner` role, `badge` may be unset, or still set for those removed from the partner program
                         headers: {
-                            'Client-ID': 'f78304ba46861ddc7a8c1fb3706e997c3945ef275d7618a9'
+                            'User-Agent': 'Firebot/4.13.2 (JavaScript; Node.js v10.7.0; Electron 2.0.5)' // would probably be good to make dynamic
+                            // 'Client-ID': 'f78304ba46861ddc7a8c1fb3706e997c3945ef275d7618a9' // this is unnecessary, use useragent instead
                         }
                     }, function (err, res) {
                         let data = JSON.parse(res.body);
